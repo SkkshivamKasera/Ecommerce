@@ -55,7 +55,7 @@ const Payment = () => {
                 withCredentials: true
             }
             const { data } = await axios.post(
-                "http://localhost:5000/api/v1/payment/process",
+                "https://e-commerce-d4u4.onrender.com/api/v1/payment/process",
                 paymentData,
                 config
             )

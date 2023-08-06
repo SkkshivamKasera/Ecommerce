@@ -6,7 +6,7 @@ export const login = (email, password) => async (dispatch) => {
         dispatch({type: LOGIN_REQUEST})
         const config = {headers: {"Content-Type":"application/json"}, withCredentials: true}
         const {data} = await axios.post(
-            'http://localhost:5000/api/v1/login',
+            'https://e-commerce-d4u4.onrender.com/api/v1/login',
             {email, password},
             config
         )
@@ -24,7 +24,7 @@ export const register = (myForm) => async (dispatch) => {
     try{
         dispatch({type: REGISTER_USER_REQUEST})
         const config = {headers: {"Content-Type": "multipart/form-data"}, withCredentials: true}
-        const { data } = await axios.post('http://localhost:5000/api/v1/signup', myForm, config)
+        const { data } = await axios.post('https://e-commerce-d4u4.onrender.com/api/v1/signup', myForm, config)
         if(data && data.user)
         dispatch({type: REGISTER_USER_SUCCESS, payload: data.user})
         else
@@ -37,7 +37,7 @@ export const register = (myForm) => async (dispatch) => {
 export const loadUser = () => async (dispatch) => {
     try{
         dispatch({type: LOAD_USER_REQUEST})
-        const {data} = await axios.get('http://localhost:5000/api/v1/me', {withCredentials: true})
+        const {data} = await axios.get('https://e-commerce-d4u4.onrender.com/api/v1/me', {withCredentials: true})
         if(data && data.user){
            dispatch({type: LOAD_USER_SUCCESS, payload: data.user})
         }else{
@@ -51,7 +51,7 @@ export const loadUser = () => async (dispatch) => {
 export const allUserDetails = () => async (dispatch) => {
     try{
         dispatch({type: ALL_USER_REQUEST})
-        const {data} = await axios.get('http://localhost:5000/api/v1/admin/users', {withCredentials: true})
+        const {data} = await axios.get('https://e-commerce-d4u4.onrender.com/api/v1/admin/users', {withCredentials: true})
         if(data && data.users){
            dispatch({type: ALL_USER_SUCCESS, payload: data.users})
         }else{
@@ -65,7 +65,7 @@ export const allUserDetails = () => async (dispatch) => {
 export const getUserDetails = (id) => async (dispatch) => {
     try{
         dispatch({type: USER_DETAILS_REQUEST})
-        const {data} = await axios.get(`http://localhost:5000/api/v1/admin/user/${id}`, {withCredentials: true})
+        const {data} = await axios.get(`https://e-commerce-d4u4.onrender.com/api/v1/admin/user/${id}`, {withCredentials: true})
         if(data && data.user){
            dispatch({type: USER_DETAILS_SUCCESS, payload: data.user})
         }else{
@@ -78,7 +78,7 @@ export const getUserDetails = (id) => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
     try{
-        await axios.get("http://localhost:5000/api/v1/logout", { withCredentials: true})
+        await axios.get("https://e-commerce-d4u4.onrender.com/api/v1/logout", { withCredentials: true})
         dispatch({type: LOGOUT_SUCCESS})
     }catch(error){
         dispatch({type: LOGOUT_FAIL, payload: error.message})
@@ -90,7 +90,7 @@ export const updateProfile = (userData) => async (dispatch) => {
     console.log(userData)
     dispatch({ type: UPDATE_PROFILE_REQUEST });
     const config = { headers: { "Content-Type": "multipart/form-data" }, withCredentials: true };
-    const { data } = await axios.put('http://localhost:5000/api/v1/me/update', userData, config);
+    const { data } = await axios.put('https://e-commerce-d4u4.onrender.com/api/v1/me/update', userData, config);
     if(data.success)
     dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.success });
     else
@@ -108,7 +108,7 @@ export const updatePassword = (passwords) => async (dispatch) => {
   try {
       dispatch({ type: UPDATE_PASSWORD_REQUEST });
       const config = { headers: { "Content-Type": "application/json" }, withCredentials: true };
-      const { data } = await axios.put('http://localhost:5000/api/v1/password/update', passwords, config);
+      const { data } = await axios.put('https://e-commerce-d4u4.onrender.com/api/v1/password/update', passwords, config);
       if(data.success)
       dispatch({ type: UPDATE_PASSWORD_SUCCESS, payload: data.success });
       else
@@ -126,7 +126,7 @@ export const forgotPassword = (email) => async (dispatch) => {
         dispatch({type: FORGOT_PASSWORD_REQUEST})
         const config = {headers: {"Content-Type":"application/json"}, withCredentials: true}
         const {data} = await axios.post(
-            'http://localhost:5000/api/v1/password/forgot',
+            'https://e-commerce-d4u4.onrender.com/api/v1/password/forgot',
             email,
             config
         )
@@ -146,7 +146,7 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
         dispatch({type: RESET_PASSWORD_REQUEST})
         const config = {headers: {"Content-Type":"application/json"}, withCredentials: true}
         const {data} = await axios.put(
-            `http://localhost:5000/api/v1/password/reset/${token}`,
+            `https://e-commerce-d4u4.onrender.com/api/v1/password/reset/${token}`,
             passwords,
             config
         )
@@ -164,7 +164,7 @@ export const updateUser = (id, userData) => async (dispatch) => {
     try {
         dispatch({ type: UPDATE_USER_REQUEST });
         const config = { headers: { "Content-Type": "application/json" }, withCredentials: true };
-        const { data } = await axios.put(`http://localhost:5000/api/v1/admin/user/${id}`, userData, config);
+        const { data } = await axios.put(`https://e-commerce-d4u4.onrender.com/api/v1/admin/user/${id}`, userData, config);
         if(data.success)
         dispatch({ type: UPDATE_USER_SUCCESS, payload: data.success });
         else
@@ -181,7 +181,7 @@ export const updateUser = (id, userData) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_USER_REQUEST });
         const config = { withCredentials: true };
-        const { data } = await axios.delete(`http://localhost:5000/api/v1/admin/user/${id}`, config);
+        const { data } = await axios.delete(`https://e-commerce-d4u4.onrender.com/api/v1/admin/user/${id}`, config);
         if(data.success)
         dispatch({ type: DELETE_USER_SUCCESS, payload: data.success });
         else
